@@ -7,11 +7,17 @@ revolte:
       summarize: true
       suggestFixes: true
       commentStyle: Balanced
+    codeQuality:
+      codeStyle:
+        rules:
+          invalidCharacterEsc: 'on'
+          invalidCharacterNul: 'on'
+          syntaxError: 'on'
   env:
     staging:
       branch: main
       codeReview: true
-      codeQuality: false
+      codeQuality: true
       services:
         rid_1:
           type: WEB_SERVICE
