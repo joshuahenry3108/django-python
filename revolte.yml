@@ -12,7 +12,7 @@ revolte:
         rules:
           abstractClassInstantiated: 'on'
     testSuite:
-      command: pytest --maxfail=1 --disable-warnings -q
+      command: pytest
   env:
     staging:
       branch: main
