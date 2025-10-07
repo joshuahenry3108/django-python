@@ -1,17 +1,24 @@
 revolte:
   version: '1.0'
-  project: PYAPPP
-  appName: PYAPP
+  project: Test Suite
+  appName: test-suite-python
   config:
     codeReview:
       summarize: true
       suggestFixes: true
       commentStyle: Balanced
+    codeQuality:
+      codeStyle:
+        rules:
+          abstractClassInstantiated: 'on'
+    testSuite:
+      command: pytest --maxfail=1 --disable-warnings -q
   env:
     staging:
       branch: main
-      codeReview: true
+      codeReview: false
       codeQuality: true
+      testSuite: true
       services:
         rid_1:
           type: WEB_SERVICE
@@ -43,6 +50,7 @@ revolte:
       branch: main
       codeReview: false
       codeQuality: true
+      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
@@ -74,6 +82,7 @@ revolte:
       branch: main
       codeReview: false
       codeQuality: false
+      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
@@ -108,6 +117,7 @@ revolte:
     preview:
       codeReview: false
       codeQuality: false
+      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
