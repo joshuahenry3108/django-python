@@ -1,55 +1,17 @@
 revolte:
   version: '1.0'
-  project: Test Suite
-  appName: test-suite-python
+  project: Senorita
+  appName: SENO
   config:
     codeReview:
       summarize: true
-      suggestFixes: true
-      commentStyle: Balanced
-    codeQuality:
-      codeStyle:
-        rules:
-          abstractClassInstantiated: 'on'
-    testSuite:
-      command: pytest
+      suggestFixes: false
+      commentStyle: Verbose
   env:
     staging:
       branch: main
       codeReview: false
-      codeQuality: true
-      testSuite: true
-      services:
-        rid_1:
-          type: WEB_SERVICE
-          name: web_service
-          entryPoint: wsgi.py
-          properties:
-            health: /health
-            port: 8080
-            variables:
-              BASE_URL: /api/v1
-              DATABASE_HOST: '#{db.dbUrl}'
-              DB_PORT: '#{db.dbPort}'
-              DATABASE_USER: '#{db.dbUsername}'
-              DATABASE_PASSWORD: '#{db.dbPassword}'
-              DATABASE_NAME: '#{db.dbName}'
-          specifications:
-            cpu: 2
-            memory: 2
-            storage: 30
-        rid_2:
-          type: DATABASE
-          name: db
-          specifications:
-            cpu: 2
-            memory: 1
-            storage: 30
-            engine: postgres
-    qa:
-      branch: main
-      codeReview: false
-      codeQuality: true
+      codeQuality: false
       testSuite: false
       services:
         rid_1:
@@ -69,6 +31,38 @@ revolte:
           specifications:
             cpu: 2
             memory: 1
+            storage: 30
+        rid_2:
+          type: DATABASE
+          name: db
+          specifications:
+            cpu: 2
+            memory: 1
+            storage: 30
+            engine: postgres
+    qa:
+      branch: main
+      codeReview: false
+      codeQuality: false
+      testSuite: false
+      services:
+        rid_1:
+          type: WEB_SERVICE
+          name: web_service
+          entryPoint: wsgi.py
+          properties:
+            health: /health
+            port: 8080
+            variables:
+              BASE_URL: /api/v1
+              DATABASE_URL: '#{db.dbUrl}'
+              DATABASE_PORT: '#{db.dbPort}'
+              DATABASE_USERNAME: '#{db.dbUsername}'
+              DATABASE_PASSWORD: '#{db.dbPassword}'
+              DATABASE_NAME: '#{db.dbName}'
+          specifications:
+            cpu: 2
+            memory: 2
             storage: 30
         rid_2:
           type: DATABASE
