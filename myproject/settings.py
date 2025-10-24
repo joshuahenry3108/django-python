@@ -10,6 +10,25 @@ SECRET_KEY = 'your-secret-key'
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
+# Redis URL - from env variable or default local
+REDIS_URL = os.getenv("REDIS_URL", "redis://redis:6379/1")
+
+# Django Cache Settings
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": REDIS_URL,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+        "KEY_PREFIX": "myapp"
+    }
+}
+
+# Optional - use Redis for Django session storage too
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
